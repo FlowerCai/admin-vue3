@@ -47,43 +47,43 @@
 </template>
 
 <script lang="ts" setup>
-import { Icon, MessagePlugin } from "tdesign-vue-next";
-import type { SubmitContext } from "tdesign-vue-next";
-import { reactive, ref } from "vue";
-import type { TokenRequest } from "@/api/types";
-import { useAppStore, useUserStore } from "@/store";
-import { useRouter } from "vue-router";
+import { Icon, MessagePlugin } from "tdesign-vue-next"
+import type { SubmitContext } from "tdesign-vue-next"
+import { reactive, ref } from "vue"
+import type { TokenRequest } from "@/api/types"
+import { useAppStore, useUserStore } from "@/store"
+import { useRouter } from "vue-router"
 
 const rules = {
   username: [{ required: true, message: "请填写用户名" }],
   password: [{ required: true, message: "请填写密码" }],
-};
+}
 
 const loginForm = reactive<TokenRequest>({
-  username: "",
-  password: "",
-});
+  username: "admin",
+  password: "admin123",
+})
 
-const appStore = useAppStore();
-const userStore = useUserStore();
+const appStore = useAppStore()
+const userStore = useUserStore()
 
-const loading = ref(false);
+const loading = ref(false)
 
-const router = useRouter();
+const router = useRouter()
 const handleLogin = async ({ validateResult }: SubmitContext) => {
   if (validateResult !== true) {
-    return;
+    return
   }
-  loading.value = true;
+  loading.value = true
   try {
-    await appStore.login(loginForm);
-    await userStore.fetchCurrentUser();
-    await MessagePlugin.success("登录成功");
-    await router.push({ name: "dashboard" });
+    await appStore.login(loginForm)
+    await userStore.fetchCurrentUser()
+    await MessagePlugin.success("登录成功")
+    await router.push({ name: "dashboard" })
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

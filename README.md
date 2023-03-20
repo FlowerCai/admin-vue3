@@ -8,7 +8,30 @@ Admin 是借鉴 github 优秀后台项目[soybean-admin](https://github.com/hong
 
 ## 功能特性
 
-1.登录
+- 实现功能点
+
+  1. 登录界面
+
+     > 引入 Tdesign 库，
+
+  1. Pinia 引入
+  1. 登录逻辑
+  1. API 封装：API 错误处理，全局提示
+  1. token 持久化方案
+  1. 用户基本信息获取
+  1. 退出登录逻辑编写
+  1. 退出登录入口组件
+  1. 权限集增加到 router 扩展
+  1. 菜单栏组件封装
+  1. pinia 管理 permissionRoutes
+  1. 自定义组件 v-permission
+  1. 用户管理业务组件，包括用户创建、编辑
+
+- 技术栈
+
+- 收获
+
+- 扩展学习收获
 
 - 登录/注销
 - 权限验证

@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="content">
       <t-card>
-        <h1>{{}}</h1>
+        <h1>Admin</h1>
         <t-form
           ref="form"
           :data="loginForm"
@@ -54,6 +54,7 @@ import type { TokenRequest } from "@/api/types"
 import { useAppStore, useUserStore } from "@/store"
 import { useRouter } from "vue-router"
 
+// 不输入username和password的提示词
 const rules = {
   username: [{ required: true, message: "请填写用户名" }],
   password: [{ required: true, message: "请填写密码" }],
@@ -91,6 +92,7 @@ const handleLogin = async ({ validateResult }: SubmitContext) => {
   width: 100vw;
   height: 100vh;
   background-color: #f5f5f5;
+  // 居中对齐
   display: flex;
   align-items: center;
   justify-content: center;

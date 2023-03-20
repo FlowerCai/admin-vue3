@@ -53,26 +53,26 @@
   ></role-edit-dialog>
 </template>
 
-<script lang="ts" setup>
-import { PermissionEnum } from "@/config/permission.config";
-import { useEditDialog } from "@/composables/useEditDialog";
-import type { RoleCreateRequest, RoleType } from "@/api/types";
-import roleApi from "@/api/role";
-import { reactive } from "vue";
-import { useSearch } from "@/composables/useSearch";
-import RoleEditDialog from "./role-edit-dialog.vue";
-import { Icon } from "tdesign-vue-next";
+<script setup lang="ts">
+import { PermissionEnum } from "@/config/permission.config"
+import { useEditDialog } from "@/composables/useEditDialog"
+import type { RoleCreateRequest, RoleType } from "@/api/types"
+import roleApi from "@/api/role"
+import { reactive } from "vue"
+import { useSearch } from "@/composables/useSearch"
+import RoleEditDialog from "./role-edit-dialog.vue"
+import { Icon } from "tdesign-vue-next"
 
 const columns = [
   { colKey: "id", title: "ID" },
   { colKey: "name", title: "角色名称" },
   { colKey: "label", title: "角色标识" },
   { colKey: "operation", title: "操作" },
-];
+]
 const searchKey = reactive({
   name: "",
   label: "",
-});
+})
 
 const {
   showDialog,
@@ -81,14 +81,14 @@ const {
   onDialogClose,
   handleEdit,
   handleConfirm,
-} = useEditDialog<RoleType, RoleCreateRequest>(roleApi, "角色");
+} = useEditDialog<RoleType, RoleCreateRequest>(roleApi, "角色")
 
 const { data, fetchData, pagination, loading, onPageChange } = useSearch<
   RoleType,
   {
-    name: string;
-    label: string;
+    name: string
+    label: string
   }
->(roleApi, searchKey);
+>(roleApi, searchKey)
 </script>
 <style lang="less" scoped></style>

@@ -8,6 +8,8 @@ Admin 是借鉴 github 优秀后台项目[soybean-admin](https://github.com/hong
 
 ## 功能特性
 
+1.登录
+
 - 登录/注销
 - 权限验证
   - 动态路由

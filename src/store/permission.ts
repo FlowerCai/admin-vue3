@@ -1,10 +1,11 @@
-import { defineStore } from "pinia";
-import type { RouteRecordName, RouteRecordRaw } from "vue-router";
-import { MENU_ROUTE_NAME, routes } from "@/router";
+// 权限状态管理
+import { defineStore } from "pinia"
+import type { RouteRecordName, RouteRecordRaw } from "vue-router"
+import { MENU_ROUTE_NAME, routes } from "@/router"
 
 type PermissionState = {
-  routes: Array<RouteRecordRaw>;
-};
+  routes: Array<RouteRecordRaw>
+}
 
 const filterRoutes = (
   routes: Array<RouteRecordRaw>,
@@ -12,7 +13,7 @@ const filterRoutes = (
 ) => {
   return routes.filter((route: RouteRecordRaw) => {
     if (route.children) {
-      route.children = filterRoutes(route.children, permissions);
+      route.children = filterRoutes(route.children, permissions)
     }
     // 1. 没有定义meta的路由 ： !route.meta
     // 2. 没有定义meta里面permission !route.meta.permission
@@ -23,43 +24,43 @@ const filterRoutes = (
         (!route.meta.permission ||
           (route.meta.permission &&
             permissions.includes(route.meta.permission))))
-    );
-  });
-};
+    )
+  })
+}
 
 const buildPermissionRoutesNameList = (routes: Array<RouteRecordRaw>) => {
-  const nameList: Array<RouteRecordName> = [];
+  const nameList: Array<RouteRecordName> = []
   routes.forEach((route) => {
     if (route.children) {
-      nameList.push(...buildPermissionRoutesNameList(route.children));
+      nameList.push(...buildPermissionRoutesNameList(route.children))
     }
     if (route.name) {
-      nameList.push(route.name);
+      nameList.push(route.name)
     }
-  });
-  return nameList;
-};
+  })
+  return nameList
+}
 
 export const usePermissionStore = defineStore("permission", {
   state: (): PermissionState => {
     return {
       routes: [],
-    };
+    }
   },
   persist: true,
   actions: {
     generateRoutes(permissions: Array<string>, admin = false) {
-      this.routes = admin ? routes : filterRoutes(routes, permissions);
+      this.routes = admin ? routes : filterRoutes(routes, permissions)
     },
   },
   getters: {
     menuRoutes(): Array<RouteRecordRaw> | undefined {
       return this.routes.find(
         (route: RouteRecordRaw) => route.name === MENU_ROUTE_NAME
-      )?.children;
+      )?.children
     },
     permissionRouteNamesList(): Array<RouteRecordName> {
-      return this.routes ? buildPermissionRoutesNameList(this.routes) : [];
+      return this.routes ? buildPermissionRoutesNameList(this.routes) : []
     },
   },
-});
+})

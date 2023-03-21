@@ -16,8 +16,9 @@ const instance: AxiosInstance = axios.create({
 
 const tokenPrefix = "Bearer "
 
-// 请求拦截器
+// 请求拦截器(加上)
 instance.interceptors.request.use((request: AxiosRequestConfig) => {
+  // 拦截才能拿到appstore
   const appStore = useAppStore()
   if (appStore.token && request.headers) {
     request.headers["Authorization"] = tokenPrefix + appStore.token
@@ -36,6 +37,7 @@ instance.interceptors.response.use(
     responseData && (await MessagePlugin.error(responseData.message))
 
     if (error.response?.status === 401 || error.response?.status === 403) {
+      // 退出登录
       const appStore = useAppStore()
       await appStore.logout()
     }

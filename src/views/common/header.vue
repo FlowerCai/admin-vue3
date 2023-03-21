@@ -3,7 +3,6 @@
 <template>
   <t-header class="header">
     <collapse-button v-model:collapse="appStore.menuCollapse"></collapse-button>
-
     <div class="operation-area">
       <t-dropdown
         :options="[{ content: '退出登录', value: 'logout' }]"
@@ -11,11 +10,11 @@
         @click="clickHandler"
       >
         <t-button variant="text">
+          <!-- 插槽 显示图标 -->
           <template #icon>
             <icon name="user"></icon>
           </template>
           Fang
-          <!-- {{ userStore.currentUser && userStore.currentUser.nickname }} -->
         </t-button>
       </t-dropdown>
     </div>
@@ -23,6 +22,7 @@
 </template>
 
 <script lang="ts" setup>
+// 不是全局组件，单独引入
 import { Icon } from "tdesign-vue-next"
 import { useAppStore, useUserStore } from "@/store"
 import type { DropdownOption } from "tdesign-vue-next"

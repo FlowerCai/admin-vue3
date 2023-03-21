@@ -16,6 +16,7 @@ export type AppState = {
   menuCollapse: boolean
 }
 
+// 用户类型
 export type UserType = {
   id: string
   username: string

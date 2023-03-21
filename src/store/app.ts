@@ -1,3 +1,4 @@
+// 全局程序管理 token
 import { defineStore } from "pinia"
 import type { AppState, TokenRequest } from "@/api/types"
 import tokenApi from "@/api/token"

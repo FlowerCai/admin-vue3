@@ -1,3 +1,4 @@
+// 用户状态管理
 import { defineStore } from "pinia"
 import type { UserType } from "@/api/types"
 import userApi from "@/api/user"

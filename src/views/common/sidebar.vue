@@ -1,3 +1,5 @@
+<!-- 边侧栏 -->
+
 <template>
   <t-aside :width="appStore.menuCollapse ? '64px' : '232px'">
     <t-menu :collapsed="appStore.menuCollapse" :defaultValue="$route.name">
@@ -11,12 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from "@/store";
-import SidebarItem from "@/components/SidebarItem.vue";
-import { usePermissionStore } from "@/store/permission";
+import { useAppStore } from "@/store"
+import SidebarItem from "@/components/SidebarItem.vue"
+import { usePermissionStore } from "@/store/permission"
 
-const appStore = useAppStore();
-const permissionStore = usePermissionStore();
+const appStore = useAppStore()
+const permissionStore = usePermissionStore()
 </script>
 
 <style scoped></style>

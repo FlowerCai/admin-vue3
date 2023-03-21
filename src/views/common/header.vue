@@ -1,3 +1,5 @@
+<!-- 头部区域 -->
+
 <template>
   <t-header class="header">
     <collapse-button v-model:collapse="appStore.menuCollapse"></collapse-button>

@@ -1,8 +1,12 @@
+<!-- dashboard 整体框架渲染 -->
+
 <template>
   <div>
     <t-layout class="main-layout">
+      <!-- 边侧栏 -->
       <sidebar></sidebar>
       <t-layout>
+        <!-- 头部区域 -->
         <global-header></global-header>
         <t-content class="content-layout">
           <router-view></router-view>

@@ -2,7 +2,7 @@ import type { RouteRecordName, RouteRecordRaw } from "vue-router"
 import { createRouter, createWebHashHistory } from "vue-router"
 // 登录界面
 import LoginView from "@/views/login/index.vue"
-//
+//整体 框架
 import LayoutView from "@/views/common/layout.vue"
 import NotFoundView from "@/views/error/not-found.vue"
 import NotAllowedView from "@/views/error/not-allowed.vue"
@@ -27,7 +27,7 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: MENU_ROUTE_NAME,
     component: LayoutView,
-    redirect: "dashboard",
+    redirect: "user",
     children: [
       {
         name: "dashboard",

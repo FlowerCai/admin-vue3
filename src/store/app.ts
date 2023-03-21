@@ -5,9 +5,11 @@ import tokenApi from "@/api/token"
 import { useUserStore } from "@/store/user"
 
 export const useAppStore = defineStore("app", {
+  // 让false可以正确判断类型
   state: (): AppState => {
     return {
       token: "",
+      // 控制边侧栏展开与否
       menuCollapse: false,
     }
   },
@@ -18,6 +20,7 @@ export const useAppStore = defineStore("app", {
       this.token = await tokenApi.createToken(loginForm)
     },
     async logout(): Promise<void> {
+      // 清空用户信息
       const userStore = useUserStore()
       this.token = ""
       userStore.$reset()

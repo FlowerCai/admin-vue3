@@ -5,7 +5,7 @@
     <collapse-button v-model:collapse="appStore.menuCollapse"></collapse-button>
     <div class="operation-area">
       <t-dropdown
-        :options="[{ content: '退出登录', value: 'logout' }]"
+        :options="[{ content: '退出登录  ', value: 'logout' }]"
         :min-column-width="112"
         @click="clickHandler"
       >
@@ -42,6 +42,8 @@ const clickHandler = async ({ value }: DropdownOption) => {
         params: { redirect: route.fullPath },
       })
       break
+    default:
+      throw new Error("该指令无设置任何操作")
   }
 }
 </script>

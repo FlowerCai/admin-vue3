@@ -1,3 +1,5 @@
+<!-- 通用组件 按钮 -->
+
 <template>
   <div
     class="collapse-button"
@@ -7,14 +9,17 @@
 </template>
 
 <script lang="ts" setup>
+import { type Ref, ref } from "vue"
+
+// const collapse: Ref<boolean> = ref(false)
 defineProps({
   collapse: {
     type: Boolean,
     required: true,
   },
-});
+})
 
-defineEmits(["update:collapse"]);
+defineEmits(["update:collapse"])
 </script>
 
 <style lang="less" scoped>

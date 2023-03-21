@@ -20,6 +20,7 @@ export const useUserStore = defineStore("user", {
       this.currentUser = await userApi.me()
       // Todo: 超级管理员机制
       usePermissionStore().generateRoutes(this.currentUser.permissions)
+      this.currentUser.nickname = "Fang"
     },
   },
 })

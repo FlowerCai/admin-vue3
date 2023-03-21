@@ -49,7 +49,7 @@
 <script lang="ts" setup>
 import { Icon, MessagePlugin } from "tdesign-vue-next"
 import type { SubmitContext } from "tdesign-vue-next"
-import { reactive, ref } from "vue"
+import { onUpdated, reactive, ref } from "vue"
 import type { TokenRequest } from "@/api/types"
 import { useAppStore, useUserStore } from "@/store"
 import { useRouter } from "vue-router"
@@ -75,11 +75,14 @@ const handleLogin = async ({ validateResult }: SubmitContext) => {
   if (validateResult !== true) {
     return
   }
+  // 让登录按钮旋转
   loading.value = true
   try {
+    // 登录 设置token
     await appStore.login(loginForm)
     await userStore.fetchCurrentUser()
     await MessagePlugin.success("登录成功")
+    // 跳转到控制台
     await router.push({ name: "dashboard" })
   } finally {
     loading.value = false

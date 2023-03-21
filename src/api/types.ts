@@ -1,11 +1,19 @@
+// 用户名和密码类型
 export type TokenRequest = {
   username: string
   password: string
 }
 
+// 响应错误体
 export type ErrorResponse = {
   code: number
   message: string
+}
+
+//
+export type AppState = {
+  token: string
+  menuCollapse: boolean
 }
 
 export type UserType = {

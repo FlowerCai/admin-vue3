@@ -15,12 +15,12 @@ import { permissionDirective } from "@/directives/permission"
 import { plugin } from "echarts-for-vue"
 import * as echarts from "echarts"
 
-const pina = createPinia()
-pina.use(piniaPluginPersistedstate)
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
 app.use(router)
 app.use(TDesign)
-app.use(pina)
+app.use(pinia)
 app.use(plugin, { echarts, h })
 app.directive("permission", permissionDirective)
 

@@ -10,6 +10,7 @@ export const useAppStore = defineStore("app", {
       menuCollapse: false,
     }
   },
+  // 持久层 可以选择localstorage session
   persist: true,
   actions: {
     async login(loginForm: TokenRequest): Promise<void> {

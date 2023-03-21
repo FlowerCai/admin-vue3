@@ -96,10 +96,16 @@ const whiteList: Array<RouteRecordName | undefined | null> = [
   "not-found",
   "not-allowed",
 ]
-
+// 导航守卫：每一个路由跳转之前都要验证
+/**
+ * to:跳转到哪里
+ * from:从哪里来
+ * next:继续执行下去
+ */
 router.beforeEach((to, from, next) => {
   const appStore = useAppStore()
-
+  // console.log("to", to, Object.keys(to))
+  // console.log(from)
   if (!appStore.token) {
     whiteList.indexOf(to.name) !== -1
       ? next()
@@ -107,6 +113,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if (appStore.token && to.path === "/login") {
+    // 跳转到首页
     next({ name: "dashboard" })
   }
   // 判断token是否存在，判断当前访问的域名是否合法；

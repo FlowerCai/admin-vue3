@@ -32,12 +32,15 @@ export type RoleType = {
   permissions: Array<string>
 }
 
+// 表格下数据分析数据
+
 export interface Paging {
   page?: number
   size?: number
   total?: number
 }
 
+// 模版
 export type ListResult<T> = {
   paging: Paging
   data: Array<T>

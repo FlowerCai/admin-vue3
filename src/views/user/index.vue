@@ -1,5 +1,6 @@
 <template>
   <t-card>
+    <!-- 主要操作入口 -->
     <div class="action-area">
       <t-button
         v-permission="PermissionEnum.USER_LIST_CREATE"
@@ -7,18 +8,21 @@
         >创建用户
       </t-button>
     </div>
+    <!-- 检索用户 -->
     <div class="search-area">
       <t-input
         class="search-input"
         v-model="searchKey.name"
         placeholder="请输入用户名"
       ></t-input>
+      <!-- 搜索按钮 -->
       <t-button @click="fetchData">
         <template #icon>
           <icon name="search"></icon>
         </template>
       </t-button>
     </div>
+    <!-- 表格展示数据 -->
     <t-table
       :loading="loading"
       row-key="index"

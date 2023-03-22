@@ -1,3 +1,4 @@
+// 控制台界面
 <template>
   <t-row :gutter="[16, 16]">
     <t-col v-for="(infoCard, index) in infoCards" :key="index" :span="3">

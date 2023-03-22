@@ -8,24 +8,50 @@ Admin 是借鉴 github 优秀后台项目[soybean-admin](https://github.com/hong
 
 ## 功能特性
 
-- 实现功能点
+1. 登录界面
 
-  1. 登录界面
+   > 引入 Tdesign 库, 在 main.ts 全局注入 Tdesign 组件库，之后在 vue 文件都可以使相应组件。
+   >
+   > 在编写 LoginView 时，采用 t-form 输入表单，绑定相应的用户名和密码，当点击登录时，首先会对 t-form 本身设置的规则进行验证，
+   >
+   > ```js
+   > await appStore.login(loginForm)
+   > await userStore.fetchCurrentUser()
+   > await MessagePlugin.success("登录成功")
+   > // 跳转到控制台
+   > await router.push({ name: "dashboard" })
+   > ```
+   >
+   > pinia 利用持久层保存 token,以及边侧栏的展开与否。同时发送请求获取当前用户信息，对 header.vue 头部区域基础信息进行渲染。同时默认跳转到控制台界面
 
-     > 引入 Tdesign 库，
+2. Pinia 引入
 
-  1. Pinia 引入
-  1. 登录逻辑
-  1. API 封装：API 错误处理，全局提示
-  1. token 持久化方案
-  1. 用户基本信息获取
-  1. 退出登录逻辑编写
-  1. 退出登录入口组件
-  1. 权限集增加到 router 扩展
-  1. 菜单栏组件封装
-  1. pinia 管理 permissionRoutes
-  1. 自定义组件 v-permission
-  1. 用户管理业务组件，包括用户创建、编辑
+   > 安装 pinia,同时 main.ts 全局注入 pinia
+   >
+   > ```ts
+   > const pinia = createPinia()
+   > pinia.use(piniaPluginPersistedstate)
+   > ```
+   >
+   > 创建多个 store
+   >
+   > ```tsx
+   > app.ts 从整个App创建store,创建存储token和menuCollapse(边侧栏展开与否的)，以及登录与登出界面
+   > permission.ts 从权限层面定义store，根据权限得到左边能动态渲染的菜单栏
+   > user.ts 从用户层面定义store,
+   > ```
+
+3. 登录逻辑
+4. API 封装：API 错误处理，全局提示
+5. token 持久化方案
+6. 用户基本信息获取
+7. 退出登录逻辑编写
+8. 退出登录入口组件
+9. 权限集增加到 router 扩展
+10. 菜单栏组件封装
+11. pinia 管理 permissionRoutes
+12. 自定义组件 v-permission
+13. 用户管理业务组件，包括用户创建、编辑
 
 - 技术栈
 

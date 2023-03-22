@@ -1,3 +1,4 @@
+//dashboard界面的第一排图标
 <template>
   <t-card
     class="info-card"
@@ -46,7 +47,7 @@ defineProps<Props>()
 
   .header {
     font-size: 16px;
-    font-weight: bold;
+    // font-weight: bold;
   }
 
   .info {

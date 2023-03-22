@@ -18,6 +18,7 @@ export const useUserStore = defineStore("user", {
   actions: {
     async fetchCurrentUser() {
       this.currentUser = await userApi.me()
+      console.log("id", this.currentUser.id)
       // Todo: 超级管理员机制
       usePermissionStore().generateRoutes(this.currentUser.permissions)
       this.currentUser.nickname = "Fang"

@@ -72,6 +72,7 @@ import type { UserCreateRequest, UserType } from "@/api/types"
 import EditDialog from "@/views/user/edit-dialog.vue"
 import { useEditDialog } from "@/composables/useEditDialog"
 
+// 列表根据这个渲染
 const columns = [
   { colKey: "id", title: "ID" },
   { colKey: "username", title: "用户名" },
@@ -80,10 +81,13 @@ const columns = [
   { colKey: "operation", title: "操作" },
 ]
 
+// 检索模型：用户名 昵称
 const searchKey = reactive({
   name: "",
 })
 
+// data 要渲染的数据
+// pagination 表格分页模型
 const { data, fetchData, pagination, loading, onPageChange } = useSearch<
   UserType,
   {

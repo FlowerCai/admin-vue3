@@ -11,14 +11,16 @@ import { useAppStore } from "@/store"
 import { PermissionEnum } from "@/config/permission.config"
 import { usePermissionStore } from "@/store/permission"
 
+//增加Meta属性
 declare module "vue-router" {
   interface RouteMeta extends Record<string | number | symbol, undefined> {
     permission?: string
-    icon?: string
+    icon?: string //可选属性
     title?: string
   }
 }
 
+// 渲染菜单栏的方式
 export const MENU_ROUTE_NAME = "menuRoot"
 
 export const routes: Array<RouteRecordRaw> = [
@@ -34,11 +36,13 @@ export const routes: Array<RouteRecordRaw> = [
         path: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
+          // 枚举类统一管理
           permission: PermissionEnum.DASHBOARD,
-          title: "控制台",
+          title: "控制台", //渲染到菜单栏里
           icon: "dashboard",
         },
       },
+
       {
         name: "user",
         path: "user",

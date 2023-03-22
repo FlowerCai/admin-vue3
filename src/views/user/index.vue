@@ -59,14 +59,14 @@
 </template>
 
 <script lang="ts" setup>
-import { PermissionEnum } from "@/config/permission.config";
-import { Icon } from "tdesign-vue-next";
-import { useSearch } from "@/composables/useSearch";
-import userApi from "@/api/user";
-import { reactive } from "vue";
-import type { UserCreateRequest, UserType } from "@/api/types";
-import EditDialog from "@/views/user/edit-dialog.vue";
-import { useEditDialog } from "@/composables/useEditDialog";
+import { PermissionEnum } from "@/config/permission.config"
+import { Icon } from "tdesign-vue-next"
+import { useSearch } from "@/composables/useSearch"
+import userApi from "@/api/user"
+import { reactive } from "vue"
+import type { UserCreateRequest, UserType } from "@/api/types"
+import EditDialog from "@/views/user/edit-dialog.vue"
+import { useEditDialog } from "@/composables/useEditDialog"
 
 const columns = [
   { colKey: "id", title: "ID" },
@@ -74,18 +74,18 @@ const columns = [
   { colKey: "nickname", title: "昵称" },
   { colKey: "roles", title: "角色" },
   { colKey: "operation", title: "操作" },
-];
+]
 
 const searchKey = reactive({
   name: "",
-});
+})
 
 const { data, fetchData, pagination, loading, onPageChange } = useSearch<
   UserType,
   {
-    name: string;
+    name: string
   }
->(userApi, searchKey);
+>(userApi, searchKey)
 
 const {
   showDialog,
@@ -94,6 +94,6 @@ const {
   handleEdit,
   onDialogClose,
   handleConfirm,
-} = useEditDialog<UserType, UserCreateRequest>(userApi, "用户");
+} = useEditDialog<UserType, UserCreateRequest>(userApi, "用户")
 </script>
 <style lang="less" scoped></style>

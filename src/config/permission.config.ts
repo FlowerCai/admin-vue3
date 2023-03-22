@@ -1,6 +1,7 @@
+// 定义权限枚举
 export enum PermissionEnum {
-  DASHBOARD = "dashboard",
-  USER = "user",
+  DASHBOARD = "dashboard", //控制台
+  USER = "user", //
   USER_LIST = "user:list",
   USER_LIST_CREATE = "user:list:create",
   USER_LIST_EDIT = "user:list:edit",
@@ -10,10 +11,10 @@ export enum PermissionEnum {
 }
 
 type PermissionsTree = {
-  label: string;
-  value: string;
-  children?: Array<PermissionsTree>;
-};
+  label: string
+  value: string
+  children?: Array<PermissionsTree>
+}
 
 export const permissionsTree: Array<PermissionsTree> = [
   { label: "控制台", value: PermissionEnum.DASHBOARD },
@@ -39,4 +40,4 @@ export const permissionsTree: Array<PermissionsTree> = [
       },
     ],
   },
-];
+]

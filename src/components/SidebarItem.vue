@@ -26,14 +26,15 @@
 </template>
 
 <script lang="ts" setup>
-import { Icon } from "tdesign-vue-next";
+import { Icon } from "tdesign-vue-next"
 
+// item
 defineProps({
   item: {
     type: Object,
     default: null,
   },
-});
+})
 </script>
 
 <style scoped></style>

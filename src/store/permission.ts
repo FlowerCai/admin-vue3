@@ -11,7 +11,10 @@ const filterRoutes = (
   routes: Array<RouteRecordRaw>,
   permissions: Array<string>
 ) => {
-  return routes.filter((route: RouteRecordRaw) => {
+  console.log("hold on", routes, permissions)
+
+  const newRoutes = routes.filter((route: RouteRecordRaw) => {
+    console.log("yes", route)
     if (route.children) {
       route.children = filterRoutes(route.children, permissions)
     }
@@ -26,6 +29,8 @@ const filterRoutes = (
             permissions.includes(route.meta.permission))))
     )
   })
+  console.log("newRoutes", newRoutes)
+  return newRoutes
 }
 
 const buildPermissionRoutesNameList = (routes: Array<RouteRecordRaw>) => {
@@ -48,6 +53,7 @@ export const usePermissionStore = defineStore("permission", {
     }
   },
   persist: true,
+  // 得到应该渲染的路由
   actions: {
     generateRoutes(permissions: Array<string>, admin = false) {
       this.routes = admin ? routes : filterRoutes(routes, permissions)
@@ -55,9 +61,11 @@ export const usePermissionStore = defineStore("permission", {
   },
   getters: {
     menuRoutes(): Array<RouteRecordRaw> | undefined {
-      return this.routes.find(
+      const menu = this.routes.find(
         (route: RouteRecordRaw) => route.name === MENU_ROUTE_NAME
       )?.children
+      console.log("menu", menu)
+      return menu
     },
     permissionRouteNamesList(): Array<RouteRecordName> {
       return this.routes ? buildPermissionRoutesNameList(this.routes) : []

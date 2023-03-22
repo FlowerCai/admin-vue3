@@ -18,7 +18,7 @@ const tokenPrefix = "Bearer "
 
 // 请求拦截器(加上)
 instance.interceptors.request.use((request: AxiosRequestConfig) => {
-  // 拦截才能拿到appstore
+  // 拦截才能拿到appStore
   const appStore = useAppStore()
   if (appStore.token && request.headers) {
     request.headers["Authorization"] = tokenPrefix + appStore.token

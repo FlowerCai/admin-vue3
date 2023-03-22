@@ -42,36 +42,78 @@ Admin 是借鉴 github 优秀后台项目[soybean-admin](https://github.com/hong
    > ```
 
 3. 登录逻辑
+
+   > 首先设置好 axios 请求的 base_url,创建请求实例
+   >
+   > ```
+   > const instance: AxiosInstance = axios.create({
+   >   baseURL: BASE_URL,
+   >   // 60s没请求到就超时
+   >   timeout: 60000,
+   > })
+   > ```
+   >
+   > 运用 axios 创建的实例，用 get 请求得到当前用户的基础信息
+   >
+   > ```tsx
+   > const me = (): Promise<UserType> => {
+   >   return request.get("/users/me")
+   > }
+   > ```
+   >
+   > 对 token 进行存储
+   >
+   > ```tsx
+   > // 获取tokens
+   > const createToken = (tokenRequest: TokenRequest): Promise<string> => {
+   >   return request.post("/tokens", tokenRequest)
+   > }
+   >
+   > async login(loginForm: TokenRequest): Promise<void> {
+   >   this.token = await tokenApi.createToken(loginForm)
+   >   const permissionStore = usePermissionStore()
+   >   console.log("permission routes", typeof permissionStore.routes)
+   >   console.log(Object.keys(permissionStore.routes))
+   >   console.log(permissionStore.routes)
+   > },
+   > ```
+
 4. API 封装：API 错误处理，全局提示
-5. token 持久化方案
-6. 用户基本信息获取
-7. 退出登录逻辑编写
-8. 退出登录入口组件
-9. 权限集增加到 router 扩展
-10. 菜单栏组件封装
-11. pinia 管理 permissionRoutes
-12. 自定义组件 v-permission
-13. 用户管理业务组件，包括用户创建、编辑
 
-- 技术栈
+   > API 封装主要封装 axios 请求，全局请求前缀 url 进行设置，同时对请求和响应进行相应的拦截处理，
+   >
+   > 请求拦截器主要判断当前 token 的存在与否，如果存在 token,需要在请求的鉴权头部加上 appStore 当中的 token
+   >
+   > 响应拦截器对 API 响应错误做出处理，如果响应状态码是 401 403,此时执行 appStore 的登出操作
 
-- 收获
+5. 权限集增加到 router 扩展
 
-- 扩展学习收获
-
-- 登录/注销
-- 权限验证
-  - 动态路由
-  - 权限指令
-- 实用组件
-  - ECharts
-- 控制台
-- 用户管理
-- 角色管理
-- 表格
-  - 基础表格
-  - 内联编辑
-- 错误页面
-  - 404 错误页面
-  - 403 错误页面
-  - 全局接口拦截、响应拦截和请求拦截，处理错误
+   > 项目中的权限指的是当前用户能获取到什么样的界面，以及是否具有创建用户、编辑用户信息的权限，项目中实现权限管理的方法是增加 routeMeta 的属性
+   >
+   > ```tsx
+   > //增加Meta属性
+   > declare module "vue-router" {
+   >   interface RouteMeta extends Record<string | number | symbol, undefined> {
+   >     permission?: string
+   >     icon?: string //可选属性
+   >     title?: string
+   >   }
+   > }
+   >
+   > export enum PermissionEnum {
+   >   DASHBOARD = "dashboard", //控制台
+   >   USER = "user", //
+   >   USER_LIST = "user:list",
+   >   USER_LIST_CREATE = "user:list:create",
+   >   USER_LIST_EDIT = "user:list:edit",
+   >   USER_ROLES = "user:roles",
+   >   USER_ROLES_CREATE = "user:roles:create",
+   >   USER_ROLES_EDIT = "user:roles:edit",
+   > }
+   > ```
+   >
+   > 通过 meta 属性可以在路由中控制左边菜单栏的渲染，实现菜单栏在左边的动态呈现
+   >
+   > 同时，采用自定义指令 v-permission 来控制创建和编辑用户、创建角色和编辑角色的按钮的呈现与否，如果 permissionEnum 含有当前权限，则显示创建和编辑的按钮
+   >
+   > 所以项目的权限集管理是通过 route 的 meta 属性和自定义指令来实现的
